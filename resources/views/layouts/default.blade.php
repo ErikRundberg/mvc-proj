@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon"/>
     <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <header>
         <a href="<?= url("/") ?>"><img src="{{ URL::asset('img/diceHeader.png')}}" alt="Dice"></a>
         <nav>
             <a href="<?= url("/") ?>">Home</a>
-            <a href="<?= url("/session") ?>">Session</a>
             <a href="<?= url("/game21") ?>">Game 21</a>
         </nav>
     </header>
@@ -20,7 +20,7 @@
 @yield("content")
     </main>
         <footer>
-            Made by Erru17
+            <a href="https://github.com/Erru17/mvc-proj"><span class="material-icons">account_circle</span> Made by Erru17</a>
         </footer>
     </body>
 </html>

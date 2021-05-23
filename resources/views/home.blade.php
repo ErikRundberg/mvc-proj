@@ -5,5 +5,6 @@
     <p>You can try our game at</p>
     <br>
     <a class="button" href="{{ url('/game21') }}">Game 21</a>
+    <a class="button" href="{{ url('/session') }}">Session</a>
 </div>
 @stop

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Game21Controller;
 use App\Http\Controllers\SessionController;
 
 /*
@@ -18,10 +19,8 @@ Route::get('/', function () {
     return view('home', ["title" => "Home"]);
 });
 
-Route::get('/session', function () {
-    return view('session', ["title" => "testSession"]);
-});
+Route::get('/session', [SessionController::class, 'show']);
+Route::get('/session/destroy', [SessionController::class, 'destroy']);
 
-Route::get('/game21', function () {
-    return view('game21', ["title" => "Game 21"]);
-});
+Route::get('/game21', [Game21Controller::class, 'show']);
+Route::post('/game21', [Game21Controller::class, 'show']);
