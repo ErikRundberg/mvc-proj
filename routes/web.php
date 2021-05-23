@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home', ["title" => "Home"]);
+});
+
+Route::get('/session', function () {
+    return view('session', ["title" => "testSession"]);
+});
+
+Route::get('/game21', function () {
+    return view('game21', ["title" => "Game 21"]);
 });
