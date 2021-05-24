@@ -6,6 +6,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+h1,
+p,
+a,
+span,
+label {
+    font-family: $bit-font;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -41,7 +49,6 @@ nav {
 
     a {
         font-size: $nav-size;
-        font-family: $bit-font;
         width: 100%;
         text-align: center;
         text-decoration: none;
@@ -64,7 +71,7 @@ main {
 }
 
 footer {
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;

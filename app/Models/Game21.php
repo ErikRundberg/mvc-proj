@@ -4,78 +4,128 @@ namespace App\Models;
 
 use Request;
 use App\Models\DiceHand;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+// dh = DiceHand
 class Game21 extends Model
 {
-    public $diceHand;
-
     public function checkState(): void
     {
+        $this->checkMoney();
+
         $this->startGame();
-        // $this->postRoll();
-        // $this->postReset();
-        // $this->postStop();
-        // $this->postBack();
+        $this->goBack();
+        $this->rollDice();
+        $this->rollBust();
+        $this->computerRoll();
+        $this->submitScore();
+    }
+
+    public function checkMoney(): void
+    {
+        if (session("money") === null) {
+            session(["money" => 10]);
+            session(["bank" => 100]);
+        }
     }
 
     public function startGame(): void
     {
         if (Request::server("REQUEST_METHOD") == "POST" and Request::has("start")) {
-            $dieAmount = Request::input("start");
-            session(["start" => "yes"]);
-            session(["die" => ["dice-1", "dice-3"]]);
-            session(["sum" => 19]);
-            $this->diceHand = new DiceHand($dieAmount);
+            $dh = new DiceHand(Request::input("start"));
+            session(["dh" => $dh]);
+            session(["dh2" => $dh]);
+            session(["bet" => intval(Request::input("bet"))]);
+            if (session("name") === null) {
+                session(["name" => Request::input("name")]);
+            }
         }
     }
 
-    public function forceRoll(): void
+    public function goBack(): void
     {
-        $diceHand = new DiceHand($_SESSION["diceAmt"]);
-        $diceHand->rollAll();
-        $_SESSION["dices"] = $diceHand->getResult();
-        $_SESSION["sum"] += $diceHand->getSum();
-        $_SESSION["message"] = $diceHand->calculateWin();
+        if (Request::server("REQUEST_METHOD") == "POST" and Request::has("back")) {
+
+            session()->forget(['sum', 'compSum', 'dh', 'die', 'winner']);
+        }
     }
 
-    public function postReset(): void
+    public function rollDice(): void
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["reset"])) {
-            $_SESSION["wins"] = null;
-            $_SESSION["lose"] = null;
-        };
+        if (Request::server("REQUEST_METHOD") == "POST" and Request::has("roll")) {
+            $dh = session("dh");
+            $dh->rollAll();
+            session(["die" => $dh->getThrows()]);
+            session(["dieSum" => $dh->getThrowSum()]);
+            session(["sum" => $dh->getSum()]);
+        }
     }
 
-    public function postRoll(): void
+    public function rollBust(): void
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["roll"])) {
-            $diceHand = new DiceHand($_SESSION["diceAmt"]);
-            $diceHand->rollAll();
-            $_SESSION["dices"] = $diceHand->getResult();
-            $_SESSION["sum"] += $diceHand->getSum();
-            $_SESSION["message"] = $diceHand->calculateWin();
-        };
+        if (Request::server("REQUEST_METHOD") == "POST" and Request::has("roll")) {
+            if (session("sum") > 21) {
+                session(["compSum" => 21]);
+                $this->checkWin();
+            }
+        }
     }
 
-    public function postStop(): void
+    public function checkWin(): void
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["stop"])) {
-            $diceHand = new DiceHand($_SESSION["diceAmt"]);
-            $_SESSION["compSum"] = $diceHand->computerRoll();
-            $_SESSION["message"] = $diceHand->calculateWin();
-        };
+        if (session("win") === null) {
+            session(["win" => 0]);
+        }
+        if (session("lose") === null) {
+            session(["lose" => 0]);
+        }
+
+        $win = session("win") + 1;
+        $lose = session("lose") + 1;
+        $bankWin = session("bank") + session("bet");
+        $bankLose = session("bank") - session("bet");
+        $moneyWin = session("money") + session("bet");
+        $moneyLose = session("money") - session("bet");
+
+        if (session("sum") > 21) {
+            session(["winner" => "Computer"]);
+            session(["lose" => $lose]);
+            session(["bank" => $bankWin]);
+            session(["money" => $moneyLose]);
+        } elseif (session("compSum") > 21) {
+            session(["winner" => "Player"]);
+            session(["win" => $win]);
+            session(["bank" => $bankLose]);
+            session(["money" => $moneyWin]);
+        } else {
+            session(["winner" => "Computer"]);
+            session(["lose" => $lose]);
+            session(["bank" => $bankWin]);
+            session(["money" => $moneyLose]);
+        }
     }
 
-    public function postBack(): void
+    public function computerRoll(): void
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["back"])) {
-            $_SESSION["message"] = null;
-            $_SESSION["diceAmt"] = null;
-            $_SESSION["sum"] = null;
-            $_SESSION["compSum"] = null;
-            $_SESSION["dices"] = null;
-        };
+        if (Request::server("REQUEST_METHOD") == "POST" and Request::has("stay")) {
+            $dh = session("dh2");
+
+            while (session("compSum") <= session("sum") and session("compSum") <= 21) {
+                $dh->rollAll();
+                session(["compSum" => $dh->getSum()]);
+            }
+            $this->checkWin();
+        }
+    }
+
+    public function submitScore(): void
+    {
+        if (Request::server("REQUEST_METHOD") == "POST" and Request::has("reset")) {
+            DB::insert('insert into highscores (name, money, win, lose) values (?, ?, ?, ?)', [session("name"), session("money"), session("win"), session("lose")]);
+            session()->forget(['win', 'lose', 'money', 'bank', 'name']);
+            $this->checkMoney();
+        }
     }
 }

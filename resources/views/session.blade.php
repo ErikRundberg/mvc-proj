@@ -4,7 +4,7 @@
     $url = url("/session/destroy");
 
     echo <<<EOD
-    <div class='white-bg'>
+    <div class='white-bg session'>
     <h1>Session details</h1>
     <p>Here are some details on the session. Reload this page to see the counter increment itself.</p>
     <p>You may <a href="$url">destroy the session</a> if you like, good for dealing

@@ -9,18 +9,23 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    <script>0</script>
     <header>
         <a href="<?= url("/") ?>"><img src="{{ URL::asset('img/diceHeader.png')}}" alt="Dice"></a>
         <nav>
             <a href="<?= url("/") ?>">Home</a>
             <a href="<?= url("/game21") ?>">Game 21</a>
+            <a href="<?= url("/hiscore") ?>">Highscore</a>
         </nav>
     </header>
     <main>
 @yield("content")
     </main>
         <footer>
-            <a href="https://github.com/Erru17/mvc-proj"><span class="material-icons">account_circle</span> Made by Erru17</a>
+            <div class="center">
+                <a href="https://github.com/Erru17/mvc-proj"><span class="material-icons">account_circle</span> Made by Erru17 </a> |
+                <a href="{{ url("/session/destroy") }}"> Destroy session</a>
+            </div>
         </footer>
     </body>
 </html>

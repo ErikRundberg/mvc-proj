@@ -4,7 +4,6 @@
 @import 'utility.scss';
 @import 'globals.scss';
 
-@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 .button {
@@ -13,7 +12,6 @@
     outline: 4px solid  $grey;
     color: $white;
     font-size: $nav-size;
-    font-family: $nav-family;
     font-weight: 700;
     width: 100%;
     padding: 0.5em;
