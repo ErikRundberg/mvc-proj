@@ -10,7 +10,8 @@ h1,
 p,
 a,
 span,
-label {
+label,
+input[type=text] {
     font-family: $bit-font;
 }
 

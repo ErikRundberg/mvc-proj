@@ -1,0 +1,11 @@
+PHPUnit 9.5.4 by Sebastian Bergmann and contributors.
+
+.......                                                             7 / 7 (100%)
+
+Time: 00:22.537, Memory: 34.00 MB
+
+OK (7 tests, 11 assertions)
+
+Generating code coverage report in Clover XML format ... done [00:00.088]
+
+Generating code coverage report in HTML format ... done [00:00.270]

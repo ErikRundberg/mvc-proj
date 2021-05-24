@@ -24,5 +24,4 @@ class Game21Controller extends Controller
 
         return view("game21", $data);
     }
-
 }

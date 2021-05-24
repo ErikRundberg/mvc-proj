@@ -34,9 +34,9 @@ class Game21 extends Model
     public function startGame(): void
     {
         if (Request::server("REQUEST_METHOD") == "POST" and Request::has("start")) {
-            $dh = new DiceHand(Request::input("start"));
-            session(["dh" => $dh]);
-            session(["dh2" => $dh]);
+            $diceHand = new DiceHand(Request::input("start"));
+            session(["dh" => $diceHand]);
+            session(["dh2" => $diceHand]);
             session(["bet" => intval(Request::input("bet"))]);
             if (session("name") === null) {
                 session(["name" => Request::input("name")]);
@@ -47,7 +47,6 @@ class Game21 extends Model
     public function goBack(): void
     {
         if (Request::server("REQUEST_METHOD") == "POST" and Request::has("back")) {
-
             session()->forget(['sum', 'compSum', 'dh', 'die', 'winner']);
         }
     }
@@ -55,11 +54,11 @@ class Game21 extends Model
     public function rollDice(): void
     {
         if (Request::server("REQUEST_METHOD") == "POST" and Request::has("roll")) {
-            $dh = session("dh");
-            $dh->rollAll();
-            session(["die" => $dh->getThrows()]);
-            session(["dieSum" => $dh->getThrowSum()]);
-            session(["sum" => $dh->getSum()]);
+            $diceHand = session("dh");
+            $diceHand->rollAll();
+            session(["die" => $diceHand->getThrows()]);
+            session(["dieSum" => $diceHand->getThrowSum()]);
+            session(["sum" => $diceHand->getSum()]);
         }
     }
 
@@ -94,27 +93,28 @@ class Game21 extends Model
             session(["lose" => $lose]);
             session(["bank" => $bankWin]);
             session(["money" => $moneyLose]);
+            return;
         } elseif (session("compSum") > 21) {
             session(["winner" => "Player"]);
             session(["win" => $win]);
             session(["bank" => $bankLose]);
             session(["money" => $moneyWin]);
-        } else {
-            session(["winner" => "Computer"]);
-            session(["lose" => $lose]);
-            session(["bank" => $bankWin]);
-            session(["money" => $moneyLose]);
+            return;
         }
+        session(["winner" => "Computer"]);
+        session(["lose" => $lose]);
+        session(["bank" => $bankWin]);
+        session(["money" => $moneyLose]);
     }
 
     public function computerRoll(): void
     {
         if (Request::server("REQUEST_METHOD") == "POST" and Request::has("stay")) {
-            $dh = session("dh2");
+            $diceHand = session("dh2");
 
             while (session("compSum") <= session("sum") and session("compSum") <= 21) {
-                $dh->rollAll();
-                session(["compSum" => $dh->getSum()]);
+                $diceHand->rollAll();
+                session(["compSum" => $diceHand->getSum()]);
             }
             $this->checkWin();
         }

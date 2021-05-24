@@ -12,16 +12,10 @@ all:
 	@echo "Review the file 'Makefile' to see what targets are supported."
 
 clean:
-	@# Yet nothing to do in this target
+	rm -rf build .phpunit.result.cache
 
-clean-cache:
-	rm -rf cache/*/*
-
-sass:
-	sass --no-source-map htdocs/css/style.scss:htdocs/css/style.css
-
-clean-all:
-	rm -rf .bin build vendor
+clean-all: clean
+	rm -rf .bin vendor composer.lock
 
 install: install-php-tools
 	composer install
@@ -65,7 +59,7 @@ prepare:
 	rm -rf build/*
 
 phploc: prepare
-	[ ! -d src ] || $(PHPLOC) src | tee build/phploc
+	[ ! -d app ] || $(PHPLOC) app | tee build/phploc
 
 phpcs: prepare
 	[ ! -f .phpcs.xml ] || $(PHPCS) --standard=.phpcs.xml | tee build/phpcs
@@ -74,27 +68,34 @@ phpcbf:
 ifneq ($(wildcard test),)
 	- [ ! -f .phpcs.xml ] || $(PHPCBF) --standard=.phpcs.xml
 else
-	- [ ! -f .phpcs.xml ] || $(PHPCBF) --standard=.phpcs.xml src
+	- [ ! -f .phpcs.xml ] || $(PHPCBF) --standard=.phpcs.xml app
+	- [ ! -f .phpcs.xml ] || $(PHPCBF) --standard=.phpcs.xml public
+	- [ ! -f .phpcs.xml ] || $(PHPCBF) --standard=.phpcs.xml tests
 endif
 
 phpcpd: prepare
-	$(PHPCPD) src | tee build/phpcpd
+	$(PHPCPD) app | tee build/phpcpd
 
 phpmd: prepare
-	- [ ! -f .phpmd.xml ] || [ ! -d src ] || $(PHPMD) . text .phpmd.xml | tee build/phpmd
+	- [ ! -f .phpmd.xml ] || $(PHPMD) . text .phpmd.xml | tee build/phpmd
+
+# phpmd: prepare
+# 	- [ ! -f .phpmd.xml ] || [ ! -d app ] || $(PHPMD) . text .phpmd.xml | tee build/phpmd
 
 phpstan: prepare
 	- [ ! -f .phpstan.neon ] || $(PHPSTAN) analyse -c .phpstan.neon | tee build/phpstan
 
 phpunit: prepare
-	[ ! -d "test" ] || XDEBUG_MODE=coverage $(PHPUNIT) --configuration .phpunit.xml $(options) | tee build/phpunit
+	[ ! -f .phpunit.xml ] || XDEBUG_MODE=coverage $(PHPUNIT) --configuration .phpunit.xml $(options) | tee build/phpunit
+
+# phpunit: prepare
+# 	[ ! -d test ] || XDEBUG_MODE=coverage $(PHPUNIT) --configuration .phpunit.xml $(options) | tee build/phpunit
 
 cs: phpcs
 
 lint: cs phpcpd phpmd phpstan
 
 test: lint phpunit
+	composer validate
 
 metric: phploc
-
-fix: phpcbf

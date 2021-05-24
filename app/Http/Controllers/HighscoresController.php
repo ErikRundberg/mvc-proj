@@ -21,5 +21,4 @@ class HighscoresController extends Controller
 
         return view("hiscore", $data);
     }
-
 }
