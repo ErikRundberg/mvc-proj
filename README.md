@@ -17,7 +17,7 @@ You can use a program like Xampp to run the website locally.
 Run Apache on Xampp  
 Locate xampp/htdocs (Default C:/xampp/htdocs)  
 Put proj folder into htdocs (xampp/htdocs/proj)  
-In a web browser, go to the link [localhost/proj/public](http//localhost/proj/public)  
+In a web browser, go to the link [localhost/proj/public](http://localhost/proj/public)  
 alternatively [localhost:8080/proj/public](http://localhost:8080/proj/public)
 
 # How to play
