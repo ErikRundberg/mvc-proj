@@ -13,6 +13,10 @@
 
 # How to open
 
+`php artisan serve` can be used to start a server locally  
+
+Alternative:  
+
 You can use a program like Xampp to run the website locally.  
 Run Apache on Xampp  
 Locate xampp/htdocs (Default C:/xampp/htdocs)  
