@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * DiceHand Functions.
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 
 class DiceHand extends GraphicalDice
