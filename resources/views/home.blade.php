@@ -2,7 +2,7 @@
 @section('content')
 <div class="center">
     <h1>Welcome to Dice!</h1>
-    <br>
-    <a class="button" href="{{ url('/session') }}">Session</a>
+    <p>You're able to play our game above under 'Game 21'</p>
+    <p>Have fun and good luck!</p>
 </div>
 @stop

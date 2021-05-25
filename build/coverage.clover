@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1621970046">
-  <project timestamp="1621970046">
+<coverage generated="1621970339">
+  <project timestamp="1621970339">
     <file name="C:\Users\d_coo\dbwebb-kurser\mvc\me\proj\app\Models\Dice.php">
       <class name="App\Models\Dice" namespace="global">
         <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="8" coveredelements="8"/>

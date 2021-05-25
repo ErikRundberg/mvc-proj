@@ -23,8 +23,7 @@
     </main>
         <footer>
             <div class="center">
-                <a href="https://github.com/Erru17/mvc-proj"><span class="material-icons">account_circle</span> Made by Erru17 </a> |
-                <a href="{{ url("/session/destroy") }}"> Destroy session</a>
+                <a href="https://github.com/Erru17/mvc-proj"><span class="material-icons">account_circle</span> Made by Erru17 </a>
             </div>
         </footer>
     </body>
