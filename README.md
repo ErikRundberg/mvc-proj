@@ -1,7 +1,24 @@
 <!-- Update to proj -->
-Travis CI Status:
-[![Build Status](https://travis-ci.org/Erru17/mvc-proj.svg?branch=main)](https://travis-ci.org/Erru17/mvc-proj)
-Scrutinizer CI status:
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Erru17/mvc/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/Erru17/mvc/?branch=main)
-[![Code Coverage](https://scrutinizer-ci.com/g/Erru17/mvc/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/Erru17/mvc/?branch=main)
-[![Build Status](https://scrutinizer-ci.com/g/Erru17/mvc/badges/build.png?b=main)](https://scrutinizer-ci.com/g/Erru17/mvc/build-status/main)
+# Travis CI:  
+
+[![Build Status](https://travis-ci.org/Erru17/mvc-proj.svg?branch=main)](https://travis-ci.org/Erru17/mvc-proj)  
+
+# Scrutinizer CI:  
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Erru17/mvc-proj/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/Erru17/mvc-proj/?branch=main)  
+
+[![Code Coverage](https://scrutinizer-ci.com/g/Erru17/mvc-proj/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/Erru17/mvc-proj/?branch=main)  
+
+[![Build Status](https://scrutinizer-ci.com/g/Erru17/mvc-proj/badges/build.png?b=main)](https://scrutinizer-ci.com/g/Erru17/mvc-proj/build-status/main)
+
+# How to play
+Navigate to Game 21  
+Enter your name (used for highscores)  
+Choose to bet (can be kept at 0)  
+Choose to play with either one or two dices  
+Try to get as close to 21 without busting  
+When you feel happy you may submit your score (this resets your money)  
+
+# Purpose
+This webpage has been made as a [school project](https://dbwebb.se/kurser/mvc-v1/kmom10)  
+It is completely made with PHP, HTML and CSS with Laravel as framework and SQLite as database. As ORM I chose Laravel's built-in Eloquent.
