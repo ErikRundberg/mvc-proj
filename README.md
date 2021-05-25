@@ -11,7 +11,16 @@
 
 [![Build Status](https://scrutinizer-ci.com/g/Erru17/mvc-proj/badges/build.png?b=main)](https://scrutinizer-ci.com/g/Erru17/mvc-proj/build-status/main)
 
+# How to open
+
+You can use a program like Xampp to run the website locally.  
+Run Apache on Xampp
+Locate xampp/htdocs (Default C:/xampp/htdocs)
+Put proj folder into htdocs (xampp/htdocs/proj)
+In a web browser, go to the link [localhost/proj/public](localhost/proj/public)
+
 # How to play
+
 Navigate to Game 21  
 Enter your name (used for highscores)  
 Choose to bet (can be kept at 0)  
@@ -23,6 +32,7 @@ Check out your score on the Highscore page and see statistics.
 ![Preview](preview.png)
 
 # Purpose
+
 This webpage has been made as a [school project](https://dbwebb.se/kurser/mvc-v1/kmom10)  
 It is completely made with PHP, HTML and CSS with Laravel as framework and SQLite as database. As ORM I chose Laravel's built-in Eloquent.
 Logo and favicon was created using Illustrator and PhotoShop.
