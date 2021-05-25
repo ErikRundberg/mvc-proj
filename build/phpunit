@@ -1,11 +1,19 @@
 PHPUnit 9.5.4 by Sebastian Bergmann and contributors.
 
-.......                                                             7 / 7 (100%)
+.......F..                                                        10 / 10 (100%)
 
-Time: 00:22.537, Memory: 34.00 MB
+Time: 00:34.409, Memory: 36.00 MB
 
-OK (7 tests, 11 assertions)
+There was 1 failure:
 
-Generating code coverage report in Clover XML format ... done [00:00.088]
+1) App\Models\Game21Test::testStartGame
+Failed asserting that 12 matches expected null.
 
-Generating code coverage report in HTML format ... done [00:00.270]
+C:\Users\d_coo\dbwebb-kurser\mvc\me\proj\tests\Unit\Game21Test.php:29
+
+FAILURES!
+Tests: 10, Assertions: 16, Failures: 1.
+
+Generating code coverage report in Clover XML format ... done [00:00.037]
+
+Generating code coverage report in HTML format ... done [00:00.274]

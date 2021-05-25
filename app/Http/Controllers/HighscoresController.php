@@ -14,9 +14,12 @@ class HighscoresController extends Controller
             ->limit(10)
             ->get();
 
+        $histograms = DB::table('histograms')->get();
+
         $data = [
             "title" => "Highscores",
-            "hiscores" => $highscores
+            "hiscores" => $highscores,
+            "histograms" => $histograms[0]
         ];
 
         return view("hiscore", $data);

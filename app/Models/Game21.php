@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-// dh = DiceHand
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class Game21 extends Model
 {
     public function checkState(): void

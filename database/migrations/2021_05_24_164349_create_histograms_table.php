@@ -13,14 +13,20 @@ class CreateHistogramsTable extends Migration
      */
     public function up()
     {
-        Schema::create('highscores', function(Blueprint $table) {
+        Schema::create('histograms', function(Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('money');
-            $table->integer('win');
-            $table->integer('lose');
+            $table->integer('one')->nullable()->default(0);
+            $table->integer('two')->nullable()->default(0);
+            $table->integer('three')->nullable()->default(0);
+            $table->integer('four')->nullable()->default(0);
+            $table->integer('five')->nullable()->default(0);
+            $table->integer('six')->nullable()->default(0);
             $table->timestamps();
         });
+
+        DB::table('histograms')->insert([
+            'one' => 0
+        ]);
     }
 
     /**
@@ -30,6 +36,6 @@ class CreateHistogramsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('highscores');
+        Schema::dropIfExists('histograms');
     }
 }

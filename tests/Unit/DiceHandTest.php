@@ -27,6 +27,17 @@ class DiceHandTest extends TestCase
         $this->assertEquals($res, $exp);
     }
 
+    public function testGetThrowSum()
+    {
+        $diceHand = new DiceHand(2, 1);
+        $this->assertInstanceOf("App\Models\DiceHand", $diceHand);
+        $diceHand->rollAll();
+
+        $res = $diceHand->getThrowSum();
+        $exp = 2;
+        $this->assertEquals($res, $exp);
+    }
+
     public function testGetSum()
     {
         $diceHand = new DiceHand(2, 1);

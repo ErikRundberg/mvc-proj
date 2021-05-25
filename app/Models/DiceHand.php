@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
+
 /**
  * DiceHand Functions.
  */
@@ -33,6 +35,7 @@ class DiceHand extends GraphicalDice
             $this->sum += $dice->getLastRoll();
             $this->sumThrows += $dice->getLastRoll();
             $this->allThrows[] = $dice->getLastRoll();
+            $this->insertIntoDb($dice->getLastRoll());
         }
     }
 
@@ -49,5 +52,45 @@ class DiceHand extends GraphicalDice
     public function getSum(): int
     {
         return $this->sum;
+    }
+
+    public function insertIntoDb($int): void
+    {
+        switch ($int) {
+            case 1:
+                DB::table('histograms')->where('id', 1)->update([
+                    'one' => DB::raw('one+1')
+                ]);
+                break;
+
+            case 2:
+                DB::table('histograms')->where('id', 1)->update([
+                    'two' => DB::raw('two+1')
+                ]);
+
+            case 3:
+                DB::table('histograms')->where('id', 1)->update([
+                    'three' => DB::raw('three+1')
+                ]);
+                break;
+
+            case 4:
+                DB::table('histograms')->where('id', 1)->update([
+                    'four' => DB::raw('four+1')
+                ]);
+                break;
+
+            case 5:
+                DB::table('histograms')->where('id', 1)->update([
+                    'five' => DB::raw('five+1')
+                ]);
+                break;
+
+            case 6:
+                DB::table('histograms')->where('id', 1)->update([
+                    'six' => DB::raw('six+1')
+                ]);
+                break;
+        }
     }
 }
